@@ -13,7 +13,7 @@
       /**
        * START __
        * https://stackoverflow.com/a/41878939
-       */ 
+       */
       function arrayToPointer(array) {
         const pointer = Module._malloc(array.length * INT_BYTE_LENGTH);
         Module.HEAP32.set(array, pointer / INT_BYTE_LENGTH);
@@ -21,6 +21,9 @@
       }
 
       function pointerToArray(pointer, length) {
+        if (typeof length !== "number" || !length) {
+          throw new Error("Length must be defined, and must be a number");
+        }
         const array = new Int32Array(length);
         const pos = pointer / INT_BYTE_LENGTH;
         array.set(Module.HEAP32.subarray(pos, pos + length));
@@ -28,13 +31,12 @@
       }
       /**
        * END __
-       */ 
+       */
 
       function jsonToUint8Array(json) {
         const str = JSON.stringify(json, null, 0);
         const unit8 = new Uint8Array(str.length);
-        for (let i = 0; i < str.length; ++i)
-          unit8[i] = str.charCodeAt(i);
+        for (let i = 0; i < str.length; ++i) unit8[i] = str.charCodeAt(i);
 
         return unit8;
       }
