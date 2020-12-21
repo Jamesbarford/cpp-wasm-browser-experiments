@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="/main.js"></script>
+    <script>
+      const INT_BYTE_LENGTH = 4;
+
+      /**
+       * START __
+       * https://stackoverflow.com/a/41878939
+       */ 
+      function arrayToPointer(array) {
+        const pointer = Module._malloc(array.length * INT_BYTE_LENGTH);
+        Module.HEAP32.set(array, pointer / INT_BYTE_LENGTH);
+        return pointer;
+      }
+
+      function pointerToArray(pointer, length) {
+        const array = new Int32Array(length);
+        const pos = pointer / INT_BYTE_LENGTH;
+        array.set(Module.HEAP32.subarray(pos, pos + length));
+        return array;
+      }
+      /**
+       * END __
+       */ 
+
+      function jsonToUint8Array(json) {
+        const str = JSON.stringify(json, null, 0);
+        const unit8 = new Uint8Array(str.length);
+        for (let i = 0; i < str.length; ++i)
+          unit8[i] = str.charCodeAt(i);
+
+        return unit8;
+      }
+
+      function binArrayToJson(binArray) {
+        let str = "";
+        for (let i = 0; i < binArray.length; ++i)
+          str += String.fromCharCode(parseInt(binArray[i]));
+
+        return JSON.parse(str);
+      }
+    </script>
+  </body>
+</html>
