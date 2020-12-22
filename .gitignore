@@ -1,3 +1,5 @@
 .vscode
 *.wasm
+*.out
 main.js
+notes.md
