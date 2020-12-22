@@ -6,9 +6,9 @@
 class TypeMapping
 {
 public:
-    static void insert_into_type_mapping(TypeMapping *t_map, std::string &key, std::string &value)
+    static void bound_insert(TypeMapping *self, std::string key, std::string value)
     {
-        t_map->insert(key, value);
+        self->insert(key, value);
     }
 
     void insert(std::string &key, std::string &value)
@@ -17,11 +17,6 @@ public:
             throw std::invalid_argument("Invalid type valid type : '" + value + "' valid types: " + valid_types);
 
         current_type_mapping.insert({key, raw_type_to_json.at(value)});
-    }
-
-    static void bound_insert(TypeMapping *self, std::string key, std::string value)
-    {
-        self->insert(key, value);
     }
 
     bool has(std::string &key)

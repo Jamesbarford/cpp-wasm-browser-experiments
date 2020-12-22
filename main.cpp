@@ -3,7 +3,7 @@
  */
 
 #include <emscripten/bind.h>
-#include "util.cpp"
+#include "./src/util.cpp"
 
 void cast_func(uintptr_t bufferAddress, unsigned int size)
 {
