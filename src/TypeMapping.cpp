@@ -26,7 +26,7 @@ public:
         return false;
     }
 
-    JSON_TYPES get(std::string &key)
+    JSON_TYPE get(std::string &key)
     {
         if (!has(key))
             throw std::invalid_argument("No mapping for key : " + key);
@@ -41,11 +41,11 @@ public:
 
 private:
     std::string valid_types = "string, number";
-    std::map<std::string, JSON_TYPES> current_type_mapping;
-    std::map<std::string, JSON_TYPES> raw_type_to_json = {
-        {"string", JSON_TYPES::STRING},
-        {"number", JSON_TYPES::NUMBER}};
-    std::map<JSON_TYPES, std::string> json_type_to_raw = {
-        {JSON_TYPES::STRING, "string"},
-        {JSON_TYPES::NUMBER, "number"}};
+    std::map<std::string, JSON_TYPE> current_type_mapping;
+    std::map<std::string, JSON_TYPE> raw_type_to_json = {
+        {"string", JSON_TYPE::STRING},
+        {"number", JSON_TYPE::NUMBER}};
+    std::map<JSON_TYPE, std::string> json_type_to_raw = {
+        {JSON_TYPE::STRING, "string"},
+        {JSON_TYPE::NUMBER, "number"}};
 };

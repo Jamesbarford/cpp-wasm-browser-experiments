@@ -1,5 +1,5 @@
 #pragma once
-enum JSON_TYPES
+enum JSON_TYPE
 {
     NUMBER,
     STRING
